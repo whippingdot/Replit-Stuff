@@ -1,0 +1,56 @@
+/* Reverse all the colors of the light.css file. Make it so that the dark blue becomes light and the light blue becomes dark */
+/* Also change the background image to the dark version */
+body {
+  color: white;
+  background-color: black;
+}
+
+header {
+  background-image: url("../Images/DarkWindows11.jpeg");
+}
+
+.section1 {
+  color: #2667fc;
+}
+
+.gridItem1 {
+  border-top: 3px dashed #071977;
+  border-left: 3px dashed #071977;
+}
+
+.gridItem2 {
+  border-top: 3px dashed #071977;
+  border-left: 3px dashed #071977;
+  border-right: 3px dashed #071977;
+}
+
+.gridItem3 {
+  border-top: 3px dashed #071977;
+  border-bottom: 3px dashed #071977;
+  border-left: 3px dashed #071977;
+}
+
+.gridItem4 {
+  border: 3px dashed #071977;
+}
+
+.section2 {
+  color: #041c82;
+}
+
+.section2 h2 {
+  color: #90d7ff;
+}
+
+.section2 button {
+  background-color: #1b264b;
+  color: #6564db;
+}
+
+.section2 button:hover {
+  color: rgba(101, 100, 219, 0.6);
+}
+
+.dark-light {
+  background-color: white;
+}

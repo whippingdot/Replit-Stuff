@@ -1,0 +1,4 @@
+#include <iostream>
+using namespace std;void checkRow(string l){if(l=="BBB"){cout<<"blue";exit(0);}else if(l=="RRR"){cout<<"red";exit(0);}}int main(){string l;string n;string e;cin>>l;cin>>n;cin>>e;checkRow(l);checkRow(n);checkRow(e);for(int i=0;i<2;i++){for(char c:"BR"){if(l[i]==n[i]&&l[i]==e[i]&&e[i]==c){if(c=='B'){cout<<"blue";exit(0);}cout<<"red";exit(0);}}}for(char c:"BR"){if(l[0]==n[1]&&l[0]==e[2]&&e[2]==c){if(c=='B'){cout<<"blue";exit(0);}cout<<"red";exit(0);}if(l[2]==n[1]&&l[2]==e[0]&&e[0]==c){if(c=='B'){cout<<"blue";exit(0);}cout<<"red";exit(0);}}cout<<"tie";}
+
+// TODO: Put everything under the same for loop

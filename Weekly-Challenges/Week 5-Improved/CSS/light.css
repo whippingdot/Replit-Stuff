@@ -1,0 +1,54 @@
+body {
+  color: black;
+  background-color: white;
+}
+
+header {
+  background-image: url("../Images/LightWindows11.jpeg");
+}
+
+.section1 {
+  color: #39bafe;
+}
+
+.gridItem1 {
+  border-top: 3px dashed #0326c1;
+  border-left: 3px dashed #0326c1;
+}
+
+.gridItem2 {
+  border-top: 3px dashed #0326c1;
+  border-left: 3px dashed #0326c1;
+  border-right: 3px dashed #0326c1;
+}
+
+.gridItem3 {
+  border-top: 3px dashed #0326c1;
+  border-bottom: 3px dashed #0326c1;
+  border-left: 3px dashed #0326c1;
+}
+
+.gridItem4 {
+  border: 3px dashed #0326c1;
+}
+
+.section2 {
+  color: #a5c3db;
+}
+
+.section2 h2 {
+  color: #0326c1;
+}
+
+.section2 button {
+  background-color: #90d7ff;
+  color: #6564db;
+}
+
+.section2 button:hover {
+  color: rgba(101, 100, 219, 0.6);
+}
+
+.dark-light {
+  background-color: black;
+}

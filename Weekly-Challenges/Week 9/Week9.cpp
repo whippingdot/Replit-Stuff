@@ -7,16 +7,18 @@
 #define cin std::cin
 typedef std::string string;
 
-string multiplication(string linearExpressionN, int indexes, char variable);
-string division(string linearExpressionN, int indexes, char variable);
-string addition(string linearExpressionN, int indexes, char variable);
-string subtraction(string linearExpressionN, int indexes, char variable);
+// string multiplication(string linearEquationN, int indexes, char variable);
+// string division(string linearEquationN, int indexes, char variable);
+// string addition(string linearEquationN, int indexes, char variable);
+// string subtraction(string linearEquationN, int indexes, char variable);
 
 int main()
 {
-  string linearExpression = "";
-  string linearExpression1 = "";
-  string linearExpression2 = "";
+  string linearEquation = "";
+  string linearEquation1 = "";
+  string linearEquation2 = "";
+  // string linearEquationSimp1 = "";
+  // string linearEquationSimp2 = "";
   // string linearE1numbers = "";
   // string linearE1variables = "";
   // string linearE2numbers = "";
@@ -40,14 +42,16 @@ int main()
   int operatorNoOne = 0;
   int operatorNoTwo = 0;
 
-  cout << "Enter the linear equation with one variable(lowercase is must & don't do actions that result in a power): ";
-  std::getline(cin, linearExpression);
+  cout << "NOTICE: Parentheses, powers, roots, and negative numbers will not work at this moment. I will improve this later but right now they do not work. All of the above will return errors...though some times negative numbers could work.\n\n";
 
-  linearExpression.erase(remove(linearExpression.begin(), linearExpression.end(), ' '), linearExpression.end());
+  cout << "Enter the linear equation with one variable(lowercase is must): ";
+  std::getline(cin, linearEquation);
 
-  cout << "This was the equation you inputted: " << linearExpression << "\n";
+  linearEquation.erase(remove(linearEquation.begin(), linearEquation.end(), ' '), linearEquation.end());
 
-  for (char c : linearExpression)
+  // cout << "This was the equation you inputted: " << linearEquation << "\n";
+
+  for (char c : linearEquation)
   {
     // TODO: Make sure there is one 'equals to' symbol in the equation
     if (c == '=')
@@ -90,7 +94,7 @@ int main()
     // TODO: Make sure two operands don't come right after each other
     if (c == '+' || c == '-' || c == '*' || c == '/')
     {
-      if (linearExpression[indexes + 1] == '+' || linearExpression[indexes + 1] == '-' || linearExpression[indexes + 1] == '*' || linearExpression[indexes + 1] == '/')
+      if (linearEquation[indexes + 1] == '+' || linearEquation[indexes + 1] == '-' || linearEquation[indexes + 1] == '*' || linearEquation[indexes + 1] == '/')
       {
         cout << "Really? Two operands one after another? That is what you thought you could do?\n";
         exit(1);
@@ -113,7 +117,7 @@ int main()
   }
 
   // TODO: Separate the equation into two parts
-  for (char c : linearExpression)
+  for (char c : linearEquation)
   {
     if (c == '=')
     {
@@ -123,29 +127,31 @@ int main()
 
     if (notEqualToYet)
     {
-      linearExpression1 += c;
+      linearEquation1 += c;
     }
     else
     {
-      linearExpression2 += c;
+      linearEquation2 += c;
     }
   }
 
-  cout << "Part 1: " << linearExpression1 << "\n";
-  cout << "Part 2: " << linearExpression2 << "\n";
+  // cout << "Part 1: " << linearEquation1 << "\n";
+  // cout << "Part 2: " << linearEquation2 << "\n";
 
-  for (char c : linearExpression1)
+  for (char c : linearEquation1)
   {
     length1 += 1;
+    // TODO: Remember to fix this when adding negatives so that it doesn't count the negative symbol as an operator (meaning if it is inside brackets)
     if (c == '+' || c == '-' || c == '*' || c == '/')
     {
       operatorNoOne += 1;
     }
   }
 
-  for (char c : linearExpression2)
+  for (char c : linearEquation2)
   {
     length2 += 1;
+    // TODO: Remember to fix this when adding negatives so that it doesn't count the negative symbol as an operator (meaning if it is inside brackets)
     if (c == '+' || c == '-' || c == '*' || c == '/')
     {
       operatorNoTwo += 1;
@@ -156,63 +162,64 @@ int main()
   length2 -= 1;
 
   // TODO: Retype this after seperating the equation into two parts so that for both parts you check this condition
-  if (linearExpression1[0] == '*' || linearExpression1[0] == '/' || linearExpression1[length1] == '+' || linearExpression1[length1] == '-' || linearExpression1[length1] == '*' || linearExpression1[length1] == '/')
+  if (linearEquation1[0] == '*' || linearEquation1[0] == '/' || linearEquation1[length1] == '+' || linearEquation1[length1] == '-' || linearEquation1[length1] == '*' || linearEquation1[length1] == '/')
   {
     cout << "Do not misuse operands (meaning don't use them in the wrong place) please!\n";
     exit(1);
   }
-  else if (linearExpression2[0] == '*' || linearExpression2[0] == '/' || linearExpression2[length2] == '+' || linearExpression2[length2] == '-' || linearExpression2[length2] == '*' || linearExpression2[length2] == '/')
+  else if (linearEquation2[0] == '*' || linearEquation2[0] == '/' || linearEquation2[length2] == '+' || linearEquation2[length2] == '-' || linearEquation2[length2] == '*' || linearEquation2[length2] == '/')
   {
     cout << "Do not misuse operands (meaning don't use them in the wrong place) please!\n";
     exit(1);
   }
 
-  while (operatorNoOne < 1)
-  {
-    for (char c : linearExpression1)
-    {
-      if (c == '*')
-      {
-        indexes--;
-        while (linearExpression1[indexes] != '+' || linearExpression1[indexes] != '-' || linearExpression1[indexes] != '*' || linearExpression1[indexes] != '/')
-        {
-        }
-        indexes = beforeIndex;
-      }
-      indexes++;
-      beforeIndex = indexes;
-    }
+  linearEquation = linearEquation1 + "=" + linearEquation2;
 
-    operatorNoOne = 0;
-    for (char c : linearExpression1)
-    {
-      if (c == '+' || c == '-' || c == '*' || c == '/')
-      {
-        operatorNoOne += 1;
-      }
-    }
-  }
+  cout << "Your equation \"" << linearEquation << "\" is valid!\n";
 
-  // for (char c : linearExpression1)
+  // while (operatorNoOne < 1)
+  // {
+  //   for (char c : linearEquation1)
+  //   {
+  //     if (c == '*')
+  //     {
+  //       linearEquationSimp1 += multiplication(linearEquation1, indexes, variable);
+  //     }
+  //     indexes++;
+  //     beforeIndex = indexes;
+  //   }
+
+  //   operatorNoOne = 0;
+  //   for (char c : linearEquation1)
+  //   {
+  //     // TODO: Remember to fix this when adding negatives so that it doesn't count the negative symbol as an operator (meaning if it is inside brackets)
+  //     if (c == '+' || c == '-' || c == '*' || c == '/')
+  //     {
+  //       operatorNoOne += 1;
+  //     }
+  //   }
+  // }
+
+  // for (char c : linearEquation1)
   // {
   //   if (c == '+' || c == '-' || c == '*' || c == '/' || indexes == 0)
   //   {
-  //     if (linearExpression1[indexes] == variable)
+  //     if (linearEquation1[indexes] == variable)
   //     {
   //       variableOne = true;
   //     }
   //     indexes++;
 
-  //     while (linearExpression1[indexes] != '+' || linearExpression1[indexes] != '-' || linearExpression1[indexes] != '*' || linearExpression1[indexes] != '/')
+  //     while (linearEquation1[indexes] != '+' || linearEquation1[indexes] != '-' || linearEquation1[indexes] != '*' || linearEquation1[indexes] != '/')
   //     {
   //       cout << "reached here 1\n";
-  //       if (linearExpression1[indexes] == variable)
+  //       if (linearEquation1[indexes] == variable)
   //       {
   //         cout << "reached here 2\n";
   //         variableOne = true;
   //       }
   //       indexes++;
-  //       cout << linearExpression1[indexes] << "\n";
+  //       cout << linearEquation1[indexes] << "\n";
   //     }
   //     indexes = beforeIndex;
 
@@ -222,15 +229,15 @@ int main()
   //       if (variableOne)
   //       {
   //         cout << "reached here 4\n";
-  //         linearE1variables += linearExpression1[indexes];
+  //         linearE1variables += linearEquation1[indexes];
   //       }
   //       else
   //       {
   //         cout << "reached here 5\n";
-  //         linearE1numbers += linearExpression1[indexes];
+  //         linearE1numbers += linearEquation1[indexes];
   //       }
   //       indexes++;
-  //     } while (linearExpression1[indexes] != '+' || linearExpression1[indexes] != '-' || linearExpression1[indexes] != '*' || linearExpression1[indexes] != '/');
+  //     } while (linearEquation1[indexes] != '+' || linearEquation1[indexes] != '-' || linearEquation1[indexes] != '*' || linearEquation1[indexes] != '/');
   //     indexes = beforeIndex;
   //   }
   //   indexes++;
@@ -243,423 +250,423 @@ int main()
   // IMPORTANT: Follow PEMDAS
 }
 
-string multiplication(string linearExpressionN, int indexes, char variable)
-{
-  bool variablePresent = false;
-
-  string theFirstNumber = "";
-  string theSecondNumber = "";
-  string theFinalProduct = "";
-
-  int beforeIndex = indexes;
-  int firstInteger = 0;
-  int secondInteger = 0;
-  int theFinalProductInt = 0;
-  int length = 0;
-
-  for (char c : linearExpressionN)
-  {
-    length++;
-  }
-
-  indexes--;
-  while (indexes != -1 || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    indexes--;
-
-    if (indexes == -1 || linearExpressionN[indexes] == '*' || linearExpressionN[indexes] == '/' || linearExpressionN[indexes] == '+')
-    {
-      indexes++;
-      while (linearExpressionN[indexes] != '*')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          variablePresent = true;
-          break;
-        }
-      }
-    }
-    else if (linearExpressionN[indexes] == '-')
-    {
-      while (linearExpressionN[indexes] != '*')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          variablePresent = true;
-          break;
-        }
-      }
-    }
-  }
-  indexes = beforeIndex;
-
-  indexes++;
-  while (indexes != length || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    theSecondNumber += linearExpressionN[indexes];
-    indexes++;
-
-    if (linearExpressionN[indexes] == variable)
-    {
-      if (variablePresent)
-      {
-        cout << "Unfortunately since we cannot operate with powers and roots, multiplying two variables cannot work as it results in that variable squared, which is a power!\n";
-        exit(1);
-      }
-      variablePresent = true;
-      break;
-    }
-  }
-  // Just realized I haven't reset the value for `indexes` yet so note that
-
-  std::stringstream theFirstInteger;
-  std::stringstream theSecondInteger;
-
-  theFirstInteger << theFirstNumber;
-  theSecondInteger << theSecondNumber;
-
-  theFirstInteger >> firstInteger;
-  theSecondInteger >> secondInteger;
-
-  theFinalProductInt = firstInteger * secondInteger;
-  cout << "Umm final product of multiplication" << theFinalProductInt << "\n";
-
-  std::stringstream finalProduct;
-
-  finalProduct << theFinalProductInt;
-  finalProduct >> theFinalProduct;
-
-  if (variablePresent)
-  {
-    theFinalProduct += variable;
-  }
-
-  return theFinalProduct;
-}
-
-string division(string linearExpressionN, int indexes, char variable)
-{
-  // If the first number has one variable only then you can just add the variable at the end of the string, if only the second number has a variable then you have to give an error, and if both have a variable then cancel the variable
-  bool firstNVariablePresent = false;
-  bool secondNVariablePresent = false;
-
-  string theFirstNumber = "";
-  string theSecondNumber = "";
-  string theFinalProduct = "";
-
-  int beforeIndex = indexes;
-  int firstInteger = 0;
-  int secondInteger = 0;
-  int theFinalProductInt = 0;
-  int length = 0;
-
-  for (char c : linearExpressionN)
-  {
-    length++;
-  }
-
-  indexes--;
-  while (indexes != -1 || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    indexes--;
-
-    if (indexes == -1 || linearExpressionN[indexes] == '*' || linearExpressionN[indexes] == '/' || linearExpressionN[indexes] == '+')
-    {
-      indexes++;
-      while (linearExpressionN[indexes] != '/')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-    else if (linearExpressionN[indexes] == '-')
-    {
-      while (linearExpressionN[indexes] != '/')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-  }
-  indexes = beforeIndex;
-
-  indexes++;
-  while (indexes != length || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    theSecondNumber += linearExpressionN[indexes];
-    indexes++;
-
-    if (linearExpressionN[indexes] == variable)
-    {
-      secondNVariablePresent = true;
-      break;
-    }
-  }
-  // Just realized I haven't reset the value for `indexes` yet so note that
-
-  std::stringstream theFirstInteger;
-  std::stringstream theSecondInteger;
-
-  theFirstInteger << theFirstNumber;
-  theSecondInteger << theSecondNumber;
-
-  theFirstInteger >> firstInteger;
-  theSecondInteger >> secondInteger;
-
-  theFinalProductInt = firstInteger / secondInteger;
-  cout << "Umm final product of division" << theFinalProductInt << "\n";
-
-  std::stringstream finalProduct;
-
-  finalProduct << theFinalProductInt;
-  finalProduct >> theFinalProduct;
-
-  if (firstNVariablePresent && !secondNVariablePresent)
-  {
-    theFinalProduct += variable;
-  }
-  else if (secondNVariablePresent && !firstNVariablePresent)
-  {
-    cout << "Well my code cannot deal with fractions so I cannot divide a non-fraction number by a fraction number - sorry!";
-    exit(1);
-  }
-
-  return theFinalProduct;
-}
-
-string addition(string linearExpressionN, int indexes, char variable)
-{
-  bool firstNVariablePresent = false;
-  bool secondNVariablePresent = false;
-
-  string theFirstNumber = "";
-  string theSecondNumber = "";
-  string theFinalProduct = "";
-
-  int beforeIndex = indexes;
-  int firstInteger = 0;
-  int secondInteger = 0;
-  int theFinalProductInt = 0;
-  int length = 0;
-
-  for (char c : linearExpressionN)
-  {
-    length++;
-  }
-
-  indexes--;
-  while (indexes != -1 || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    indexes--;
-
-    if (indexes == -1 || linearExpressionN[indexes] == '*' || linearExpressionN[indexes] == '/' || linearExpressionN[indexes] == '+')
-    {
-      indexes++;
-      while (linearExpressionN[indexes] != '+')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-    else if (linearExpressionN[indexes] == '-')
-    {
-      while (linearExpressionN[indexes] != '+')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-  }
-  indexes = beforeIndex;
-
-  indexes++;
-  while (indexes != length || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    theSecondNumber += linearExpressionN[indexes];
-    indexes++;
-
-    if (linearExpressionN[indexes] == variable)
-    {
-      secondNVariablePresent = true;
-      break;
-    }
-  }
-  // Just realized I haven't reset the value for `indexes` yet so note that
-
-  if (firstNVariablePresent && !secondNVariablePresent)
-  {
-    theFinalProduct = theFirstNumber + variable + "+" + theSecondNumber;
-    return theFinalProduct;
-  }
-  else if (!firstNVariablePresent && secondNVariablePresent)
-  {
-    theFinalProduct = theFirstNumber + "+" + theSecondNumber + variable;
-    return theFinalProduct;
-  }
-
-  std::stringstream theFirstInteger;
-  std::stringstream theSecondInteger;
-
-  theFirstInteger << theFirstNumber;
-  theSecondInteger << theSecondNumber;
-
-  theFirstInteger >> firstInteger;
-  theSecondInteger >> secondInteger;
-
-  theFinalProductInt = firstInteger + secondInteger;
-  cout << "Umm final product of addition" << theFinalProductInt << "\n";
-
-  std::stringstream finalProduct;
-
-  finalProduct << theFinalProductInt;
-  finalProduct >> theFinalProduct;
-
-  if (firstNVariablePresent && secondNVariablePresent)
-  {
-    theFinalProduct += variable;
-  }
-
-  return theFinalProduct;
-}
-
-string subtraction(string linearExpressionN, int indexes, char variable)
-{
-  bool firstNVariablePresent = false;
-  bool secondNVariablePresent = false;
-
-  string theFirstNumber = "";
-  string theSecondNumber = "";
-  string theFinalProduct = "";
-
-  int beforeIndex = indexes;
-  int firstInteger = 0;
-  int secondInteger = 0;
-  int theFinalProductInt = 0;
-  int length = 0;
-
-  for (char c : linearExpressionN)
-  {
-    length++;
-  }
-
-  indexes--;
-  while (indexes != -1 || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    indexes--;
-
-    if (indexes == -1 || linearExpressionN[indexes] == '*' || linearExpressionN[indexes] == '/' || linearExpressionN[indexes] == '+')
-    {
-      indexes++;
-      while (linearExpressionN[indexes] != '-')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-    else if (linearExpressionN[indexes] == '-')
-    {
-      theFirstNumber += "-";
-      indexes++;
-      while (linearExpressionN[indexes] != '-')
-      {
-        theFirstNumber += linearExpressionN[indexes];
-        indexes++;
-
-        if (linearExpressionN[indexes] == variable)
-        {
-          firstNVariablePresent = true;
-          break;
-        }
-      }
-    }
-  }
-  indexes = beforeIndex;
-
-  indexes++;
-  while (indexes != length || linearExpressionN[indexes] != '+' || linearExpressionN[indexes] != '-' || linearExpressionN[indexes] != '*' || linearExpressionN[indexes] != '/')
-  {
-    theSecondNumber += linearExpressionN[indexes];
-    indexes++;
-
-    if (linearExpressionN[indexes] == variable)
-    {
-      secondNVariablePresent = true;
-      break;
-    }
-  }
-  // Just realized I haven't reset the value for `indexes` yet so note that
-
-  if (firstNVariablePresent && !secondNVariablePresent)
-  {
-    theFinalProduct = theFirstNumber + variable + "-" + theSecondNumber;
-    return theFinalProduct;
-  }
-  else if (!firstNVariablePresent && secondNVariablePresent)
-  {
-    theFinalProduct = theFirstNumber + "-" + theSecondNumber + variable;
-    return theFinalProduct;
-  }
-
-  std::stringstream theFirstInteger;
-  std::stringstream theSecondInteger;
-
-  theFirstInteger << theFirstNumber;
-  theSecondInteger << theSecondNumber;
-
-  theFirstInteger >> firstInteger;
-  theSecondInteger >> secondInteger;
-
-  theFinalProductInt = firstInteger - secondInteger;
-  cout << "Umm final product of subtraction" << theFinalProductInt << "\n";
-
-  std::stringstream finalProduct;
-
-  finalProduct << theFinalProductInt;
-  finalProduct >> theFinalProduct;
-
-  if (firstNVariablePresent && secondNVariablePresent)
-  {
-    theFinalProduct += variable;
-  }
-
-  return theFinalProduct;
-}
+// string multiplication(string linearEquationN, int indexes, char variable)
+// {
+//   bool variablePresent = false;
+
+//   string theFirstNumber = "";
+//   string theSecondNumber = "";
+//   string theFinalProduct = "";
+
+//   int beforeIndex = indexes;
+//   int firstInteger = 0;
+//   int secondInteger = 0;
+//   int theFinalProductInt = 0;
+//   int length = 0;
+
+//   for (char c : linearEquationN)
+//   {
+//     length++;
+//   }
+
+//   indexes--;
+//   while (indexes != -1 || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     indexes--;
+
+//     if (indexes == -1 || linearEquationN[indexes] == '*' || linearEquationN[indexes] == '/' || linearEquationN[indexes] == '+')
+//     {
+//       indexes++;
+//       while (linearEquationN[indexes] != '*')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           variablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//     else if (linearEquationN[indexes] == '-')
+//     {
+//       while (linearEquationN[indexes] != '*')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           variablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//   }
+//   indexes = beforeIndex;
+
+//   indexes++;
+//   while (indexes != length || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     theSecondNumber += linearEquationN[indexes];
+//     indexes++;
+
+//     if (linearEquationN[indexes] == variable)
+//     {
+//       if (variablePresent)
+//       {
+//         cout << "Unfortunately since we cannot operate with powers and roots, multiplying two variables cannot work as it results in that variable squared, which is a power!\n";
+//         exit(1);
+//       }
+//       variablePresent = true;
+//       break;
+//     }
+//   }
+//   // Just realized I haven't reset the value for `indexes` yet so note that
+
+//   std::stringstream theFirstInteger;
+//   std::stringstream theSecondInteger;
+
+//   theFirstInteger << theFirstNumber;
+//   theSecondInteger << theSecondNumber;
+
+//   theFirstInteger >> firstInteger;
+//   theSecondInteger >> secondInteger;
+
+//   theFinalProductInt = firstInteger * secondInteger;
+//   cout << "Umm final product of multiplication" << theFinalProductInt << "\n";
+
+//   std::stringstream finalProduct;
+
+//   finalProduct << theFinalProductInt;
+//   finalProduct >> theFinalProduct;
+
+//   if (variablePresent)
+//   {
+//     theFinalProduct += variable;
+//   }
+
+//   return theFinalProduct;
+// }
+
+// string division(string linearEquationN, int indexes, char variable)
+// {
+//   // If the first number has one variable only then you can just add the variable at the end of the string, if only the second number has a variable then you have to give an error, and if both have a variable then cancel the variable
+//   bool firstNVariablePresent = false;
+//   bool secondNVariablePresent = false;
+
+//   string theFirstNumber = "";
+//   string theSecondNumber = "";
+//   string theFinalProduct = "";
+
+//   int beforeIndex = indexes;
+//   int firstInteger = 0;
+//   int secondInteger = 0;
+//   int theFinalProductInt = 0;
+//   int length = 0;
+
+//   for (char c : linearEquationN)
+//   {
+//     length++;
+//   }
+
+//   indexes--;
+//   while (indexes != -1 || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     indexes--;
+
+//     if (indexes == -1 || linearEquationN[indexes] == '*' || linearEquationN[indexes] == '/' || linearEquationN[indexes] == '+')
+//     {
+//       indexes++;
+//       while (linearEquationN[indexes] != '/')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//     else if (linearEquationN[indexes] == '-')
+//     {
+//       while (linearEquationN[indexes] != '/')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//   }
+//   indexes = beforeIndex;
+
+//   indexes++;
+//   while (indexes != length || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     theSecondNumber += linearEquationN[indexes];
+//     indexes++;
+
+//     if (linearEquationN[indexes] == variable)
+//     {
+//       secondNVariablePresent = true;
+//       break;
+//     }
+//   }
+//   // Just realized I haven't reset the value for `indexes` yet so note that
+
+//   std::stringstream theFirstInteger;
+//   std::stringstream theSecondInteger;
+
+//   theFirstInteger << theFirstNumber;
+//   theSecondInteger << theSecondNumber;
+
+//   theFirstInteger >> firstInteger;
+//   theSecondInteger >> secondInteger;
+
+//   theFinalProductInt = firstInteger / secondInteger;
+//   cout << "Umm final product of division" << theFinalProductInt << "\n";
+
+//   std::stringstream finalProduct;
+
+//   finalProduct << theFinalProductInt;
+//   finalProduct >> theFinalProduct;
+
+//   if (firstNVariablePresent && !secondNVariablePresent)
+//   {
+//     theFinalProduct += variable;
+//   }
+//   else if (secondNVariablePresent && !firstNVariablePresent)
+//   {
+//     cout << "Well my code cannot deal with fractions so I cannot divide a non-fraction number by a fraction number - sorry!";
+//     exit(1);
+//   }
+
+//   return theFinalProduct;
+// }
+
+// string addition(string linearEquationN, int indexes, char variable)
+// {
+//   bool firstNVariablePresent = false;
+//   bool secondNVariablePresent = false;
+
+//   string theFirstNumber = "";
+//   string theSecondNumber = "";
+//   string theFinalProduct = "";
+
+//   int beforeIndex = indexes;
+//   int firstInteger = 0;
+//   int secondInteger = 0;
+//   int theFinalProductInt = 0;
+//   int length = 0;
+
+//   for (char c : linearEquationN)
+//   {
+//     length++;
+//   }
+
+//   indexes--;
+//   while (indexes != -1 || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     indexes--;
+
+//     if (indexes == -1 || linearEquationN[indexes] == '*' || linearEquationN[indexes] == '/' || linearEquationN[indexes] == '+')
+//     {
+//       indexes++;
+//       while (linearEquationN[indexes] != '+')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//     else if (linearEquationN[indexes] == '-')
+//     {
+//       while (linearEquationN[indexes] != '+')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//   }
+//   indexes = beforeIndex;
+
+//   indexes++;
+//   while (indexes != length || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     theSecondNumber += linearEquationN[indexes];
+//     indexes++;
+
+//     if (linearEquationN[indexes] == variable)
+//     {
+//       secondNVariablePresent = true;
+//       break;
+//     }
+//   }
+//   // Just realized I haven't reset the value for `indexes` yet so note that
+
+//   if (firstNVariablePresent && !secondNVariablePresent)
+//   {
+//     theFinalProduct = theFirstNumber + variable + "+" + theSecondNumber;
+//     return theFinalProduct;
+//   }
+//   else if (!firstNVariablePresent && secondNVariablePresent)
+//   {
+//     theFinalProduct = theFirstNumber + "+" + theSecondNumber + variable;
+//     return theFinalProduct;
+//   }
+
+//   std::stringstream theFirstInteger;
+//   std::stringstream theSecondInteger;
+
+//   theFirstInteger << theFirstNumber;
+//   theSecondInteger << theSecondNumber;
+
+//   theFirstInteger >> firstInteger;
+//   theSecondInteger >> secondInteger;
+
+//   theFinalProductInt = firstInteger + secondInteger;
+//   cout << "Umm final product of addition" << theFinalProductInt << "\n";
+
+//   std::stringstream finalProduct;
+
+//   finalProduct << theFinalProductInt;
+//   finalProduct >> theFinalProduct;
+
+//   if (firstNVariablePresent && secondNVariablePresent)
+//   {
+//     theFinalProduct += variable;
+//   }
+
+//   return theFinalProduct;
+// }
+
+// string subtraction(string linearEquationN, int indexes, char variable)
+// {
+//   bool firstNVariablePresent = false;
+//   bool secondNVariablePresent = false;
+
+//   string theFirstNumber = "";
+//   string theSecondNumber = "";
+//   string theFinalProduct = "";
+
+//   int beforeIndex = indexes;
+//   int firstInteger = 0;
+//   int secondInteger = 0;
+//   int theFinalProductInt = 0;
+//   int length = 0;
+
+//   for (char c : linearEquationN)
+//   {
+//     length++;
+//   }
+
+//   indexes--;
+//   while (indexes != -1 || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     indexes--;
+
+//     if (indexes == -1 || linearEquationN[indexes] == '*' || linearEquationN[indexes] == '/' || linearEquationN[indexes] == '+')
+//     {
+//       indexes++;
+//       while (linearEquationN[indexes] != '-')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//     else if (linearEquationN[indexes] == '-')
+//     {
+//       theFirstNumber += "-";
+//       indexes++;
+//       while (linearEquationN[indexes] != '-')
+//       {
+//         theFirstNumber += linearEquationN[indexes];
+//         indexes++;
+
+//         if (linearEquationN[indexes] == variable)
+//         {
+//           firstNVariablePresent = true;
+//           break;
+//         }
+//       }
+//     }
+//   }
+//   indexes = beforeIndex;
+
+//   indexes++;
+//   while (indexes != length || linearEquationN[indexes] != '+' || linearEquationN[indexes] != '-' || linearEquationN[indexes] != '*' || linearEquationN[indexes] != '/')
+//   {
+//     theSecondNumber += linearEquationN[indexes];
+//     indexes++;
+
+//     if (linearEquationN[indexes] == variable)
+//     {
+//       secondNVariablePresent = true;
+//       break;
+//     }
+//   }
+//   // Just realized I haven't reset the value for `indexes` yet so note that
+
+//   if (firstNVariablePresent && !secondNVariablePresent)
+//   {
+//     theFinalProduct = theFirstNumber + variable + "-" + theSecondNumber;
+//     return theFinalProduct;
+//   }
+//   else if (!firstNVariablePresent && secondNVariablePresent)
+//   {
+//     theFinalProduct = theFirstNumber + "-" + theSecondNumber + variable;
+//     return theFinalProduct;
+//   }
+
+//   std::stringstream theFirstInteger;
+//   std::stringstream theSecondInteger;
+
+//   theFirstInteger << theFirstNumber;
+//   theSecondInteger << theSecondNumber;
+
+//   theFirstInteger >> firstInteger;
+//   theSecondInteger >> secondInteger;
+
+//   theFinalProductInt = firstInteger - secondInteger;
+//   cout << "Umm final product of subtraction" << theFinalProductInt << "\n";
+
+//   std::stringstream finalProduct;
+
+//   finalProduct << theFinalProductInt;
+//   finalProduct >> theFinalProduct;
+
+//   if (firstNVariablePresent && secondNVariablePresent)
+//   {
+//     theFinalProduct += variable;
+//   }
+
+//   return theFinalProduct;
+// }
 
 // PROBLEM: Fix the problem that occurs when there is only a variable, and no coefficient
 // IDEA: Add a 1 before a variable without a coefficient. Also when adding or subtracting coefficient numbers only do the operation on the coefficient and then add the variable at the end.

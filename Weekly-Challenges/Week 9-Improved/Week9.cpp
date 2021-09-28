@@ -56,7 +56,7 @@ int main()
 
   linearEquation.erase(remove(linearEquation.begin(), linearEquation.end(), ' '), linearEquation.end());
 
-  cout << "This was the equation you inputted: " << linearEquation << "\n";
+  /* DEBUG */ cout << "This was the equation you inputted: " << linearEquation << "\n";
 
   for (char c : linearEquation)
   {
@@ -191,8 +191,8 @@ int main()
     }
   }
 
-  cout << "Part 1: " << linearEquation1 << "\n";
-  cout << "Part 2: " << linearEquation2 << "\n";
+  /* DEBUG */ cout << "Part 1: " << linearEquation1 << "\n";
+  /* DEBUG */ cout << "Part 2: " << linearEquation2 << "\n";
 
   length1 = linearEquation1.length();
   for (char c : linearEquation1)
@@ -277,7 +277,7 @@ int main()
 
   while (plusNumOne > 1)
   {
-    cout << "stuck here...\n";
+    /* DEBUG */ cout << "stuck here...\n";
     while (indexes < length1)
     {
       if (linearEquation1[indexes] == '+')
@@ -312,7 +312,7 @@ int main()
 
   while (subNumOne > 1)
   {
-    cout << "how stuck here\n";
+    /* DEBUG */ cout << "how stuck here\n";
     for (char c : linearEquation1)
     {
       if (c == '-')
@@ -390,7 +390,7 @@ int main()
 
   while (plusNumTwo > 1)
   {
-    cout << "stuck here...\n";
+    /* DEBUG */ cout << "stuck here...\n";
     for (char c : linearEquation2)
     {
       if (c == '+')
@@ -450,8 +450,6 @@ int main()
     indexes++;
   }
   indexes = 0;
-
-  cout << "reached here but program ded\n";
 
   linearEquationSimp = linearEquation1 + "=" + linearEquation2;
 
@@ -743,7 +741,7 @@ string addition(string linearEquationN, int indexes, char variable)
   indexes--;
   while (true)
   {
-    cout << "entered here 6\n";
+    /* DEBUG */ cout << "entered here 6\n";
     indexes--;
 
     cout << indexes << "\n";
@@ -751,10 +749,10 @@ string addition(string linearEquationN, int indexes, char variable)
     {
       indexes++;
       firstIndex = indexes;
-      cout << "entered here 0\n";
+      /* DEBUG */ cout << "entered here 0\n";
       while (linearEquationN[indexes] != '+')
       {
-        cout << "entered here 1\n";
+        /* DEBUG */ cout << "entered here 1\n";
         theFirstNumber += linearEquationN[indexes];
         indexes++;
 
@@ -768,7 +766,7 @@ string addition(string linearEquationN, int indexes, char variable)
     }
     else if (linearEquationN[indexes] == '-')
     {
-      cout << "entered here 2\n";
+      /* DEBUG */ cout << "entered here 2\n";
       firstIndex = indexes;
       while (linearEquationN[indexes] != '+')
       {
@@ -789,7 +787,7 @@ string addition(string linearEquationN, int indexes, char variable)
   indexes++;
   while (true)
   {
-    cout << "entered here 3\n";
+    /* DEBUG */ cout << "entered here 3\n";
     theSecondNumber += linearEquationN[indexes];
     indexes++;
 
